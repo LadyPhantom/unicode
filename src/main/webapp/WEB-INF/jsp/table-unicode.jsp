@@ -6,54 +6,54 @@
     <title>Unicode</title>
 
     <style>
-        table{
-            /*border: solid black;*/
-            border-spacing: 5px;
+        *{
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            margin: auto;
+            text-align: center;
         }
 
-        /*th, td {*/
-            /*padding: 100px;*/
-        /*}*/
+        h1{
+            margin: 10px;
+        }
+
+        table{
+            border-radius: 5px;
+            border-collapse: collapse;
+            width: 50%;
+            background-color: #0d1321 ;
+        }
 
         div:first-child{
-            background-color: #757780;
+            /*background-color: #0d1321;*/
+            color: white;
             padding: 10px;
+            border-radius: 5px;
         }
         div:last-child{
-            background-color: #c9c9ee;
+            background-color: #586f7c;
             padding: 20px;
+            border-radius: 5px;
         }
-        .empty{
-            background-color: #710627;
-            padding: 20px;
-        }
+        /*.empty{*/
+            /*background-color: #710627;*/
+            /*padding: 20px;*/
+        /*}*/
 
     </style>
 
 </head>
 <body>
+<%-- todo: afficher un titre différent selon les besoins --%>
 <h1>Les caractères de 0 à 255</h1>
-<p />
-<hr width="100%" />
 
 <table>
-<c:forEach var="alphabet" items="${alphabet}">
+<c:forEach var="alphabet" items="${alphabet}" varStatus="status">
 
-    <c:if test="${alphabet%10==1}">
+    <c:if test="${status.index%10==0}">
         <tr>
     </c:if>
 
     <td>
-        <%--<c:choose>--%>
-            <%--<c:when test="${alphabet == ''}">--%>
-                <%--<div class="empty">${alphabet}</div>--%>
-            <%--</c:when>--%>
-            <%--<c:otherwise>--%>
-                <%--<div>${alphabet}</div>--%>
-            <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
-
-
         <div>${alphabet}</div>
         <div>&#${alphabet};</div>
     </td>
