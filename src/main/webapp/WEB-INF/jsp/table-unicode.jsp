@@ -34,10 +34,6 @@
             padding: 20px;
             border-radius: 5px;
         }
-        /*.empty{*/
-            /*background-color: #710627;*/
-            /*padding: 20px;*/
-        /*}*/
 
     </style>
 

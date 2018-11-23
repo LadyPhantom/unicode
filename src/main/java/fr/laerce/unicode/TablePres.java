@@ -16,8 +16,6 @@ public class TablePres extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //todo rename les "alphabet" en plagePredef
-
         // -------------Récupération des paramètres--------------------------------------------------
         // 1e formulaire
        String alpha = request.getParameter("alphabet"); //Nom de la plage prédéfini:
@@ -32,6 +30,7 @@ public class TablePres extends HttpServlet {
         String typeAffichage = request.getParameter("typeAffichage"); //affichage decimal/hexa?
         ArrayList<Integer> liste;
         ArrayList<String> listeHexa;
+
 
         // -------------Récupération de la liste de characters---------------------------------------
 
