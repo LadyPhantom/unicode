@@ -16,60 +16,71 @@ public class TablePres extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //todo rename les "alphabet" en plagePredef
+
         // -------------Récupération des paramètres--------------------------------------------------
-        ArrayList<Integer> liste = new ArrayList<>();
-        String alpha = request.getParameter("alphabet");
+        // 1e formulaire
+       String alpha = request.getParameter("alphabet"); //Nom de la plage prédéfini:
+                                                            //Latin, arabe, hira/kata-kana,etc
         int min=-1, max=-1;
-        String str_min = request.getParameter("t_min");
-        String str_max = request.getParameter("t_max");
-        String nom = request.getParameter("nom");
-        String typeAffichage = request.getParameter("typeAffichage");
+        // 2e formulaire
+        String str_min = request.getParameter("t_min"); //min de la plage
+        String str_max = request.getParameter("t_max"); //max de la plage
+        String nom = request.getParameter("nom"); //nom de la table
+
+        // Données communes aux 2 formulaires
+        String typeAffichage = request.getParameter("typeAffichage"); //affichage decimal/hexa?
+        ArrayList<Integer> liste;
+        ArrayList<String> listeHexa;
 
         // -------------Récupération de la liste de characters---------------------------------------
 
         if (str_min != null) min = Integer.parseInt(str_min);
         if (str_max != null) max = Integer.parseInt(str_max);
 
+        liste = recupInterval(min, max, alpha,nom);
 
-//        System.out.println(Integer.toHexString(9556));
-        liste = recupInterval(min, max, alpha);
+        // Nom de la table par défaut ou non selon que l'utilisateur
+        // a entré un nom ou pas.
+        if (nom != null){
+            request.setAttribute("nomTable",nom);
+        }else{
+            if ( (min == -1) && (max == -1) ){
+                if (alpha.equals("ascii")){
+                    nom = "Caractères de 0 à 255:";
+                }else if(alpha.equals("arabe")){
+                    nom = "Caractères arabes:";
+                }else if(alpha.equals("tibetain")){
+                    nom = "Caractères tibetain:";
+                }else if(alpha.equals("katakana")){
+                    nom = "Katakana:";
+                }else if(alpha.equals("hiragana")){
+                    nom = "Hiragana:";
+                }
+            }
+            request.setAttribute("nomTable",nom);
+        }
 
-        /* todo: test si typeAffichage=hexa
-        *  et traduire la liste d'int en liste de string (Integer.toHexString)
-        */
+        if (typeAffichage.equals("hexa")){
+            listeHexa=deciToHexa(liste);
+            request.setAttribute("alphabetHexa",listeHexa);
+        }
 
-        /* todo: test si nom (de la table) est nul ou non
-        *  si non, l'ajouter aux attributs de requete
-        * */
         request.setAttribute("alphabet",liste);
-        // -------------Ajout des indices correctes--------------------------------------------------
-//        if ( alpha!= null){
-//            if (alpha.equals("ascii")){
-//                for (int i = 1536 ; i<=1791 ; i++ ){
-//                    liste.add(i);
-//                }
-//                request.setAttribute("alphabet",liste);
-//            }
-//        }
 
+        // ---------Redirection-------------------------------------------
         String laVue = "table-unicode.jsp";
         getServletConfig().getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/"+laVue).forward(request, response);
 
     }
 
-    public ArrayList<Integer> recupInterval(int min, int max, String alpha){
+    public ArrayList<Integer> recupInterval(int min, int max, String alpha, String nom){
         ArrayList<Integer> res = new ArrayList<>();
-
-        // Test si min et/ou max sont défini ou pas.
-        // Si non, on leur affecte les valeurs default.
-        // Si oui, on vérifie qu'ils font parti de l'interval
-        // de l'alphabet qu'on cherche à afficher.
-        // Si ils dépassent les intervals, on leur affecte les valeurs default
 
         if ( (min == -1) && (max == -1) ){
             if (alpha.equals("ascii")){
-                min = 1;
+                min = 0;
                 max = 255;
             }else if(alpha.equals("arabe")){
                 min = 1536;
@@ -90,6 +101,16 @@ public class TablePres extends HttpServlet {
 
         for (int i=min ; i<=max ; i++){
             res.add(i);
+        }
+
+        return res;
+    }
+
+    public ArrayList<String> deciToHexa(ArrayList<Integer> liste){
+        ArrayList<String> res = new ArrayList<>();
+
+        for (int index : liste){
+            res.add(Integer.toHexString(index));
         }
 
         return res;

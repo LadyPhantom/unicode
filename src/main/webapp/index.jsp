@@ -45,13 +45,12 @@
     <br/><br/>
 
     <label for="nom">Donnez un nom à la table:</label>
-    <input type="text" id="nom" name="nom" value="Table :">
+    <input type="text" id="nom" name="nom">
 
     <br/>
-
-    <select name="typeAffichage" required>
-        <option value="">Selectionnez un type:</option>
-        <option value="deca">Decimal</option>
+    <label for="typeAffichage">Selectionnez un type:</label>
+    <select name="typeAffichage" id="typeAffichage">
+        <option value="">Decimal</option>
         <option value="hexa">Hexadecimal</option>
     </select>
 

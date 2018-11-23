@@ -43,8 +43,17 @@
 
 </head>
 <body>
-<%-- todo: afficher un titre différent selon les besoins --%>
-<h1>Les caractères de 0 à 255</h1>
+
+<c:choose>
+    <c:when test="${nomTable != null}">
+        <h1>${nomTable}</h1>
+    </c:when>
+    <c:otherwise>
+        <h1>Les caractères de 0 à 255</h1>
+    </c:otherwise>
+</c:choose>
+
+<%--todo: afficher les tables data d'une couleur différente si il est vide.--%>
 
 <table>
 <c:forEach var="alphabet" items="${alphabet}" varStatus="status">
@@ -54,7 +63,18 @@
     </c:if>
 
     <td>
-        <div>${alphabet}</div>
+        <c:choose>
+            <%--Affichage hexa--%>
+            <c:when test="${alphabetHexa != null}">
+                <div>${alphabetHexa[status.index]}</div>
+            </c:when>
+            <%--Affichage Deci--%>
+            <c:otherwise>
+                <div>${alphabet}</div>
+            </c:otherwise>
+
+        </c:choose>
+
         <div>&#${alphabet};</div>
     </td>
 
