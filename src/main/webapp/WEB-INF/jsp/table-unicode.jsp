@@ -20,7 +20,7 @@
             border-radius: 5px;
             border-collapse: collapse;
             width: 50%;
-            background-color: #0d1321 ;
+            background-color: #304d6d ;
         }
 
         div:first-child{
@@ -30,7 +30,7 @@
             border-radius: 5px;
         }
         div:last-child{
-            background-color: #586f7c;
+            background-color: #8693ab;
             padding: 20px;
             border-radius: 5px;
         }

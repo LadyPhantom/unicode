@@ -10,70 +10,104 @@
     <style>
         *{
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            margin: auto;
+            /*margin: auto;*/
             text-align: center;
         }
 
-        h1{
-            margin: 10px;
-        }
-
         form{
-            display: inline;
-
+            border-radius: 5px;
+            color: #304d6d;
+            display:inline-block;
+            background-color: #8693ab;
         }
+
+        label{
+            display: block;
+            font-size:11px;
+            font-weight:bold;
+            float:left;
+            margin: 0 20px 0 20px;
+        }
+
+        select{
+            display: block;
+            font-size:11px;
+            border: none;
+            margin:2px 0 20px 10px;
+        }
+
+        button{
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px auto;
+            font-size:11px;
+            color: white;
+            background-color: #607696;
+            border:none;
+        }
+
+        input {
+            display: block;
+            font-size:11px;
+            border:none;
+            margin:15px;
+        }
+
+        button:hover{
+            background-color: #304d6d;
+        }
+
     </style>
 
 </head>
 <body>
 <h2>Table de caractères Unicode</h2>
+
 <form action="/table" method="get" >
-    <input type="radio" name="alphabet" value="ascii">Liste des 256 premiers caractères<%--<br/><br/>--%>
-    <input type="radio" name="alphabet" value="arabe">Liste de l'alphabet arabe<%--<br/><br/>--%>
-    <input type="radio" name="alphabet" value="tibetain">Liste de l'alphabet tibetain<%--<br/><br/>--%>
-    <input type="radio" name="alphabet" value="katakana">Liste des katakana<%--<br/><br/>--%>
-    <input type="radio" name="alphabet" value="hiragana">Liste des hiragana<%--<br/><br/>--%>
+    <div>
+        <label>Liste des 256 premiers caractères</label>
+        <input type="radio" name="alphabet" value="ascii">
+        <label>Liste de l'alphabet arabe</label>
+        <input type="radio" name="alphabet" value="arabe">
+        <label>Liste de l'alphabet tibetain</label>
+        <input type="radio" name="alphabet" value="tibetain">
+        <label>Liste des katakana</label>
+        <input type="radio" name="alphabet" value="katakana">
+        <label>Liste des hiragana</label>
+        <input type="radio" name="alphabet" value="hiragana">
 
-    <%--<br/>--%>
+        <label for="typeAffichage">Selectionnez un type:</label>
+        <select name="typeAffichage">
+            <option value="">Decimal</option>
+            <option value="hexa">Hexadecimal</option>
+        </select>
 
-    <label for="typeAffichage">Selectionnez un type:</label>
-    <select name="typeAffichage">
-        <option value="">Decimal</option>
-        <option value="hexa">Hexadecimal</option>
-    </select>
-    <%--<br/>--%>
-    <button type="submit">Afficher la table</button>
+        <button type="submit">Afficher la table</button>
+    </div>
 </form>
 
-<%--<br/>--%>
-<%--<br/>--%>
-
 <form action="/table" method="get" >
+    <div>
+        <label>Choix de la plage de l'Unicode à afficher :</label>
 
-    <label>Choix de la plage de l'Unicode à afficher :</label>
-    <%--<br/><br/>--%>
-    <label for="t_min">Indice minimal de la table:</label>
-    <input type="number" id="t_min" name="t_min" min="0" max="1000">
+        <label for="t_min">Indice minimal de la table:</label>
+        <input type="number" id="t_min" name="t_min" min="0" max="1000">
 
-    <%--<br/><br/>--%>
 
-    <label for="t_max">Indice maximal de la table:</label>
-    <input type="number" id="t_max" name="t_max" min="1" max="1000">
+        <label for="t_max">Indice maximal de la table:</label>
+        <input type="number" id="t_max" name="t_max" min="1" max="1000">
 
-    <%--<br/><br/>--%>
+        <label for="nom">Donnez un nom à la table:</label>
+        <input type="text" id="nom" name="nom">
 
-    <label for="nom">Donnez un nom à la table:</label>
-    <input type="text" id="nom" name="nom">
+        <label for="typeAffichage">Selectionnez un type:</label>
+        <select name="typeAffichage" id="typeAffichage">
+            <option value="">Decimal</option>
+            <option value="hexa">Hexadecimal</option>
+        </select>
 
-    <%--<br/>--%>
-    <label for="typeAffichage">Selectionnez un type:</label>
-    <select name="typeAffichage" id="typeAffichage">
-        <option value="">Decimal</option>
-        <option value="hexa">Hexadecimal</option>
-    </select>
-
-    <%--<br/>--%>
-    <button type="submit">Afficher la table</button>
+        <button type="submit">Afficher la table</button>
+    </div>
 </form>
 
 </body>
