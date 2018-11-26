@@ -88,7 +88,8 @@
 
 <form action="/table" method="get" >
     <div>
-        <label>Choix de la plage de l'Unicode à afficher :</label>
+
+        <p>Choix de la plage de l'Unicode à afficher :</p>
 
         <label for="t_min">Indice minimal de la table:</label>
         <input type="number" id="t_min" name="t_min" min="0" max="1000">
